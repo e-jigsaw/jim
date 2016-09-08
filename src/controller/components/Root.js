@@ -1,7 +1,26 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import load from '../../shared/actions/creators/load.js'
 
-export default function Root () {
-  return pug`
-    div yo
-  `
+class Root extends Component {
+  componentDidMount () {
+    this.props.mounted()
+  }
+
+  render () {
+    return pug`
+      div yo
+    `
+  }
 }
+
+export default connect(
+  state => {
+    return {}
+  },
+  dispatch => {
+    return {
+      mounted: () => dispatch(load())
+    }
+  }
+)(Root)

@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux'
+import subs from '../../shared/reducers/subs/index.js'
 
 export default combineReducers({
-  test: (state = null, action) => {
-    return state
-  }
+  subs
 })
