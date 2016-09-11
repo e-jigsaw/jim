@@ -5,6 +5,18 @@ export default function keyboardHandler (event) {
     switch (event.keyCode) {
       case 83: {
         socket.emit('start')
+        dispatch({
+          type: 'start'
+        })
+        const update = () => {
+          const {subs} = getState()
+          dispatch({
+            type: 'update',
+            subs
+          })
+          setTimeout(update, 100)
+        }
+        setTimeout(update, 100)
         break
       }
     }

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import load from '../../shared/actions/creators/load.js'
 import socketInit from '../../shared/actions/socketInit.js'
 import keydown from '../actions/creators/keydown.js'
+import convertMS from '../../utils/convertMS.js'
 
 class Root extends Component {
   componentDidMount () {
@@ -11,15 +12,27 @@ class Root extends Component {
   }
 
   render () {
+    const {info, subs} = this.props
+    if (info.startAt === 0) {
+      return pug`span`
+    }
+    const diff = info.updateAt - info.startAt
     return pug`
-      div yo
+      div
+        div {convertMS(diff)}
+        div
+          span 次の字幕:&nbsp;
+          span {subs.data[info.index].strs}
+        div
+          span あと:&nbsp;
+          span {convertMS(subs.data[info.index].time[0] - diff)}
     `
   }
 }
 
 export default connect(
-  state => {
-    return {}
+  ({info, subs}) => {
+    return {info, subs}
   },
   dispatch => {
     return {
