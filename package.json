@@ -11,7 +11,7 @@
     "build": "npm-run-all -s before -p build:*",
     "build:copy": "cp src/index.html build/controller && cp src/index.html build/viewer && cp assets/target.srt build",
     "build:js": "node scripts/build.js",
-    "start": "static -p $npm_package_config_PORT build"
+    "start": "node index.js"
   },
   "author": "jigsaw (http://jgs.me)",
   "license": "MIT",
@@ -21,7 +21,11 @@
     "babel-polyfill": "^6.13.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-stage-1": "^6.13.0",
-    "node-static": "^0.7.8",
+    "babel-register": "^6.14.0",
+    "koa": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "koa-send": "^3.2.0",
+    "koa-socket": "^4.4.0",
     "npm-run-all": "^3.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -30,6 +34,7 @@
     "redux-frr": "^0.4.0",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
+    "socket.io-client": "^1.4.8",
     "webpack": "^2.1.0-beta.4"
   }
 }
