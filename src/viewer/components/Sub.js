@@ -8,7 +8,7 @@ function Sub ({subs}) {
   const strs = subs.data[subs.index].strs.map((str, i) => {
     const key = `sub-${subs.index}-${i}`
     let style = {}
-    if (/^<i>/.test(str)) {
+    if (/<i>/.test(str) || /<\/i>/.test(str)) {
       str = str.replace(/<i>/, '')
       str = str.replace(/<\/i>/, '')
       style.fontStyle = 'italic'
