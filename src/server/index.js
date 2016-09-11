@@ -39,8 +39,8 @@ app
   .use(router.allowedMethods())
 
 socket.attach(app)
-socket.on('msg', (ctx, data) => {
-  socket.broadcast('msg', data)
+socket.on('start', (ctx, data) => {
+  socket.broadcast('start', data)
 })
 
 const PORT = process.env.PORT || 3000

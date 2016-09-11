@@ -1,4 +1,5 @@
 import {frr} from 'redux-frr'
+import getMS from '../../../utils/getMS.js'
 
 export default frr('load', (state, action) => {
   const subs = {}
@@ -9,15 +10,15 @@ export default frr('load', (state, action) => {
       return
     }
     if (key === null) {
-      key = str
+      key = parseInt(str)
     } else if (subs[key] === undefined) {
       subs[key] = {
-        time: str.split(' --> '),
+        time: str.split(' --> ').map(getMS),
         strs: []
       }
     } else {
       subs[key].strs.push(str)
     }
   })
-  return {...subs}
+  return {...state, data: subs}
 })

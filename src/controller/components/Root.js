@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import load from '../../shared/actions/creators/load.js'
+import socketInit from '../../shared/actions/socketInit.js'
 import keydown from '../actions/creators/keydown.js'
 
 class Root extends Component {
@@ -24,10 +25,7 @@ export default connect(
     return {
       mounted: () => {
         dispatch(load())
-        dispatch({
-          type: 'socketInited',
-          socket: io()
-        })
+        dispatch(socketInit())
       },
       keydown: event => dispatch(keydown(event))
     }
