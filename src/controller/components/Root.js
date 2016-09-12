@@ -14,19 +14,24 @@ class Root extends Component {
 
   render () {
     const {info, subs} = this.props
-    if (info.startAt === 0) {
+    if (subs.data === undefined) {
       return pug`span`
     }
-    const diff = info.updateAt - info.startAt
+    let {index} = subs
+    let next = subs.data[index].time[0] - info.time
+    if (next < 0) {
+      index += 1
+      next = subs.data[index].time[0] - info.time
+    }
     return pug`
       div
-        div {convertMS(diff)}
+        div {convertMS(info.time)}
         div
           span 次の字幕:&nbsp;
-          span {subs.data[info.index].strs}
+          span {subs.data[index].strs}
         div
           span あと:&nbsp;
-          span {convertMS(subs.data[info.index].time[0] - diff)}
+          span {convertMS(next)}
         Buttons
     `
   }

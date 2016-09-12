@@ -13,7 +13,7 @@ export default function listenSocket () {
         })
         setTimeout(update, 100)
       }
-      setTimeout(update, 100)
+      update()
     })
     socket.on('editTime', time => {
       dispatch({

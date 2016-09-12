@@ -16,7 +16,7 @@ export default function keyboardHandler (event) {
           })
           setTimeout(update, 100)
         }
-        setTimeout(update, 100)
+        update()
         break
       }
     }
