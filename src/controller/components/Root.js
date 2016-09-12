@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import Buttons from './Buttons.js'
 import load from '../../shared/actions/creators/load.js'
 import socketInit from '../../shared/actions/socketInit.js'
 import keydown from '../actions/creators/keydown.js'
@@ -26,6 +27,7 @@ class Root extends Component {
         div
           span あと:&nbsp;
           span {convertMS(subs.data[info.index].time[0] - diff)}
+        Buttons
     `
   }
 }

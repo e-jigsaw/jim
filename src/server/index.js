@@ -42,6 +42,9 @@ socket.attach(app)
 socket.on('start', (ctx, data) => {
   socket.broadcast('start', data)
 })
+socket.on('editTime', (ctx, data) => {
+  socket.broadcast('editTime', data)
+})
 
 const PORT = process.env.PORT || 3000
 

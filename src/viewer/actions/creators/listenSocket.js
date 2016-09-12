@@ -5,17 +5,21 @@ export default function listenSocket () {
       dispatch({
         type: 'start'
       })
-      let {subs} = getState()
-      const handler = (type, index) => () => {
-        subs = getState().subs
-        setTimeout(
-          handler(type, index),
-          subs.data[subs.index + 1].time[index] - subs.data[subs.index].time[index]
-        )
-        dispatch({type})
+      const update = () => {
+        const {subs, info} = getState()
+        dispatch({
+          type: 'update',
+          subs, info
+        })
+        setTimeout(update, 100)
       }
-      setTimeout(handler('show', 0), subs.data[subs.index].time[0])
-      setTimeout(handler('hide', 1), subs.data[subs.index].time[1])
+      setTimeout(update, 100)
+    })
+    socket.on('editTime', time => {
+      dispatch({
+        type: 'editTime',
+        time
+      })
     })
   }
 }

@@ -9,10 +9,10 @@ export default function keyboardHandler (event) {
           type: 'start'
         })
         const update = () => {
-          const {subs} = getState()
+          const {subs, info} = getState()
           dispatch({
             type: 'update',
-            subs
+            subs, info
           })
           setTimeout(update, 100)
         }
