@@ -39,11 +39,11 @@ app
   .use(router.allowedMethods())
 
 socket.attach(app)
-socket.on('toggle', (ctx, data) => {
-  socket.broadcast('toggle', data)
-})
-socket.on('editTime', (ctx, data) => {
-  socket.broadcast('editTime', data)
+const keys = ['toggle', 'editTime', 'seekTime']
+keys.forEach(key => {
+  socket.on(key, (ctx, data) => {
+    socket.broadcast(key, data)
+  })
 })
 
 const PORT = process.env.PORT || 3000

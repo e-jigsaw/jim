@@ -1,7 +1,9 @@
 import {rr} from 'redux-frr'
 import update from './update.js'
 import clearTimer from './clearTimer.js'
+import seekTime from './seekTime.js'
 
 export default rr(
-  (state = {time: 0, timer: null, index: 1}) => state, update, clearTimer
+  (state = {time: 0, timer: null, index: 1}) => state,
+  update, clearTimer, seekTime
 )

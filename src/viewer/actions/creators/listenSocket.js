@@ -26,5 +26,11 @@ export default function listenSocket () {
         time
       })
     })
+    socket.on('seekTime', dest => {
+      dispatch({
+        type: 'seekTime',
+        dest
+      })
+    })
   }
 }
