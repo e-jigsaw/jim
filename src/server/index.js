@@ -39,8 +39,8 @@ app
   .use(router.allowedMethods())
 
 socket.attach(app)
-socket.on('start', (ctx, data) => {
-  socket.broadcast('start', data)
+socket.on('toggle', (ctx, data) => {
+  socket.broadcast('toggle', data)
 })
 socket.on('editTime', (ctx, data) => {
   socket.broadcast('editTime', data)

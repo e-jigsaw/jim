@@ -4,19 +4,24 @@ export default function keyboardHandler (event) {
     const {socket} = getState()
     switch (event.keyCode) {
       case 83: {
-        socket.emit('start')
-        dispatch({
-          type: 'start'
-        })
-        const update = () => {
-          const {subs, info} = getState()
+        socket.emit('toggle')
+        const {timer} = getState().info
+        if (timer === null) {
+          const update = () => {
+            const {subs, info} = getState()
+            const t = setTimeout(update, 100)
+            dispatch({
+              type: 'update',
+              subs, info, timer: t
+            })
+          }
+          update()
+        } else {
+          clearTimeout(timer)
           dispatch({
-            type: 'update',
-            subs, info
+            type: 'clearTimer'
           })
-          setTimeout(update, 100)
         }
-        update()
         break
       }
     }
