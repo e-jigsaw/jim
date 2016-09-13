@@ -18,21 +18,31 @@ class Root extends Component {
       return pug`span`
     }
     let {index} = subs
-    let next = subs.data[index].time[0] - info.time
-    if (next < 0) {
-      index += 1
-      next = subs.data[index].time[0] - info.time
+    let nextTime = subs.data[index].time[0] - info.time
+    let nextIndex = index
+    let currentElement
+    if (nextTime < 0) {
+      nextIndex += 1
+      nextTime = subs.data[nextIndex].time[0] - info.time
+      currentElement = pug`
+        div
+          span 今の字幕あと:&nbsp;
+          span {convertMS(subs.data[index].time[1] - info.time)}
+      `
+    } else {
+      currentElement = pug`span`
     }
     return pug`
       div
         div {convertMS(info.time)}
         div
           span 次の字幕:&nbsp;
-          span {subs.data[index].strs}
+          span {subs.data[nextIndex].strs}
         div
           span あと:&nbsp;
-          span {convertMS(next)}
+          span {convertMS(nextTime)}
         Buttons
+        div {currentElement}
     `
   }
 }
