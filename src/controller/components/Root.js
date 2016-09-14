@@ -32,6 +32,18 @@ class Root extends Component {
     } else {
       currentElement = pug`span`
     }
+    const n = parseInt(index)
+    const recently = Object.keys(subs.data).slice((n), (n + 10)).map(key => {
+      const sub = subs.data[key]
+      const k = `recent-${key}`
+      return pug`
+        tr(key='{k}')
+          td {convertMS(sub.time[0])}
+          td &nbsp;--&gt;&nbsp;
+          td {convertMS(sub.time[1])}
+          td {sub.strs}
+      `
+    })
     return pug`
       div
         div {convertMS(info.time)}
@@ -43,6 +55,8 @@ class Root extends Component {
           span {convertMS(nextTime)}
         Buttons
         div {currentElement}
+        table
+          tbody {recently}
     `
   }
 }
