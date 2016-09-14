@@ -5,7 +5,6 @@ function Sub ({subs}) {
   if (subs.data === undefined || !subs.isShow) {
     return pug`span`
   }
-  let isVert = false
   const strs = subs.data[subs.index].strs.map((str, i) => {
     const key = `sub-${subs.index}-${i}`
     let style = {}
@@ -14,26 +13,19 @@ function Sub ({subs}) {
       str = str.replace(/<\/i>/, '')
       style.fontStyle = 'italic'
     }
-    if (/<v>/.test(str) || /<\/v>/.test(str)) {
-      str = str.replace(/<v>/, '')
-      str = str.replace(/<\/v>/, '')
-      isVert = true
-    }
     return pug`
       div(
         key='{key}'
         style='{style}'
       ) {str}
     `
-  })
+  }).reverse()
   const style = {
     position: 'absolute',
-    bottom: isVert ? 'initial' : 0,
     width: '100%',
-    textAlign: isVert ? 'initial' : 'center',
     color: '#fff',
     fontSize: '3em',
-    writingMode: isVert ? 'vertical-rl' : 'initial'
+    writingMode: 'vertical-lr'
   }
   return pug`
     div(style='{style}') {strs}
