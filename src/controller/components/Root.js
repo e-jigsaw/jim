@@ -33,7 +33,7 @@ class Root extends Component {
       currentElement = pug`span`
     }
     const n = parseInt(index)
-    const recently = Object.keys(subs.data).slice((n), (n + 10)).map(key => {
+    const recently = Object.keys(subs.data).slice((n), (n + 20)).map(key => {
       const sub = subs.data[key]
       const k = `recent-${key}`
       return pug`
