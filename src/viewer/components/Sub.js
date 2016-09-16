@@ -24,7 +24,7 @@ function Sub ({subs}) {
     position: 'absolute',
     width: '100%',
     color: '#fff',
-    fontSize: '3em',
+    fontSize: '5em',
     writingMode: 'vertical-lr'
   }
   return pug`

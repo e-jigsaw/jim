@@ -4,6 +4,6 @@ import clearTimer from './clearTimer.js'
 import seekTime from './seekTime.js'
 
 export default rr(
-  (state = {time: 0, timer: null, index: 1}) => state,
+  (state = {time: 0, timer: null, index: 1, updateAt: null}) => state,
   update, clearTimer, seekTime
 )
