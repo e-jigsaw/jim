@@ -4,7 +4,7 @@ import getMS from '../../../utils/getMS.js'
 export default frr('load', (state, action) => {
   const subs = {}
   let key = null
-  const splited = action.srt.split('\n').forEach(str => {
+  action.srt.split('\n').forEach(str => {
     if (str.length === 1) {
       key = null
       return

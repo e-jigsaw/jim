@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Sub from './Sub.js'
+import Slide from './Slide.js'
 import load from '../../shared/actions/creators/load.js'
 import socketInit from '../../shared/actions/socketInit.js'
 import listenSocket from '../actions/creators/listenSocket.js'
@@ -18,16 +19,16 @@ class Root extends Component {
       backgroundColor: '#000',
       position: 'relative'
     }
+    const sub = this.props.info.mode === 'slide' ? pug`Slide` : pug`Sub`
     return pug`
-      div(style='{style}')
-        Sub
+      div(style='{style}') {sub}
     `
   }
 }
 
 export default connect(
-  state => {
-    return {}
+  ({info}) => {
+    return {info}
   },
   dispatch => {
     return {

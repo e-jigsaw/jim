@@ -18,8 +18,8 @@ router
       root: resolve(__dirname, '../../node_modules/socket.io-client')
     })
   })
-  .get('/assets/target.srt', async ctx => {
-    await send(ctx, 'target.srt', {
+  .get('/assets/target.:ext', async ctx => {
+    await send(ctx, `target.${ctx.params.ext}`, {
       root: resolve(__dirname, '../../build')
     })
   })
@@ -39,7 +39,7 @@ app
   .use(router.allowedMethods())
 
 socket.attach(app)
-const keys = ['toggle', 'editTime', 'seekTime']
+const keys = ['toggle', 'editTime', 'seekTime', 'slide', 'next', 'prev']
 keys.forEach(key => {
   socket.on(key, (ctx, data) => {
     socket.broadcast(key, data)

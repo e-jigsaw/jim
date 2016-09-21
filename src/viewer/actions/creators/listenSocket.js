@@ -32,5 +32,20 @@ export default function listenSocket () {
         dest
       })
     })
+    socket.on('slide', () => {
+      dispatch({
+        type: 'slide'
+      })
+    })
+    socket.on('next', () => {
+      dispatch({
+        type: 'next'
+      })
+    })
+    socket.on('prev', () => {
+      dispatch({
+        type: 'prev'
+      })
+    })
   }
 }
