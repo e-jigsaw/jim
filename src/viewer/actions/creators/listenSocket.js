@@ -12,6 +12,9 @@ export default function listenSocket () {
             subs, info, timer: t
           })
         }
+        dispatch({
+          type: 'start'
+        })
         update()
       } else {
         clearTimeout(timer)
