@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import editTime from '../actions/creators/editTime.js'
 import seekTime from '../actions/creators/seekTime.js'
+import seekNext from '../actions/creators/seekNext.js'
 
 class Buttons extends Component {
   seek () {
@@ -25,6 +26,8 @@ class Buttons extends Component {
           span :
           input(size='2' ref='sec')
           button(onClick='{this.seek.bind(this)}') シーク
+        div
+          button(onClick='{this.props.seekNext}') 次の字幕
     `
   }
 }
@@ -36,7 +39,8 @@ export default connect(
   dispatch => {
     return {
       onClick: time => event => dispatch(editTime(time)),
-      seek: time => dispatch(seekTime(time))
+      seek: time => dispatch(seekTime(time)),
+      seekNext: event => dispatch(seekNext())
     }
   }
 )(Buttons)
