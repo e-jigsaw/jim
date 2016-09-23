@@ -23,6 +23,11 @@ router
       root: resolve(__dirname, '../../build')
     })
   })
+  .get('/assets/target_en.:ext', async ctx => {
+    await send(ctx, `target_en.${ctx.params.ext}`, {
+      root: resolve(__dirname, '../../build')
+    })
+  })
   .get('/controller/:filename', async ctx => {
     await send(ctx, ctx.params.filename, {
       root: resolve(__dirname, '../../build/controller')

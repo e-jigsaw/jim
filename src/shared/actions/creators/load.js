@@ -11,9 +11,12 @@ export default function load () {
     if (isBig) {
       const res1 = await fetch('/assets/target.txt')
       const srt1 = await res1.text()
+      const res2 = await fetch('/assets/target_en.txt')
+      const srt2 = await res2.text()
       dispatch({
         type: 'bigload',
-        srt: srt1
+        srt: srt1,
+        en: srt2
       })
     }
   }

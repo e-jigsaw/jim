@@ -27,6 +27,22 @@ function Slide ({info, slide, next, prev}) {
         td {sub}
     `
   })
+  const previosly1 = Object.keys(slide.data1).slice(p2, p1).map(key => {
+    const sub = slide.data[key]
+    const k = `prev1-${key}`
+    return pug`
+      tr(key='{k}')
+        td {sub}
+    `
+  })
+  const recently1 = Object.keys(slide.data1).slice((n + 1), (n + 11)).map(key => {
+    const sub = slide.data[key]
+    const k = `recent1-${key}`
+    return pug`
+      tr(key='{k}')
+        td {sub}
+    `
+  })
   const s1 = {
     color: '#f00',
     fontWeight: 'bold'
@@ -34,20 +50,37 @@ function Slide ({info, slide, next, prev}) {
   const s2 = {
     color: '#00f'
   }
+  const root = {
+    display: 'flex',
+    flexDirection: 'colmun'
+  }
+  const child = {
+    width: '50%'
+  }
   return pug`
-    div
-      div
-        button(onClick='{prev}') 前へ
-        button(onClick='{next}') 次へ
-      table
-        tbody {previosly}
-      div(style='{s1}')
-        span {slide.data[n]}
-      div(style='{s2}')
-        span {slide.data[n + 1]}
-      table
-        tbody {recently}
-      Switch
+    div(style='{root}')
+      div(style='{child}')
+        table
+          tbody {previosly}
+        div(style='{s1}')
+          span {slide.data[n]}
+        div(style='{s2}')
+          span {slide.data[n + 1]}
+        table
+          tbody {recently}
+        div
+          button(onClick='{prev}') 前へ
+          button(onClick='{next}') 次へ
+        Switch
+      div(style='{child}')
+        table
+          tbody {previosly1}
+        div(style='{s1}')
+          span {slide.data1[n]}
+        div(style='{s2}')
+          span {slide.data1[n + 1]}
+        table
+          tbody {recently1}
   `
 }
 
