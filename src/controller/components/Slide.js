@@ -9,7 +9,17 @@ function Slide ({info, slide, next, prev}) {
   }
   let {index} = slide
   const n = parseInt(index)
-  const recently = Object.keys(slide.data).slice((n + 1), (n + 21)).map(key => {
+  const p1 = n - 1 < 0 ? 0 : n - 1
+  const p2 = n - 11 < 0 ? 0 : n - 11
+  const previosly = Object.keys(slide.data).slice(p2, p1).map(key => {
+    const sub = slide.data[key]
+    const k = `prev-${key}`
+    return pug`
+      tr(key='{k}')
+        td {sub}
+    `
+  })
+  const recently = Object.keys(slide.data).slice((n + 1), (n + 11)).map(key => {
     const sub = slide.data[key]
     const k = `recent-${key}`
     return pug`
@@ -17,16 +27,23 @@ function Slide ({info, slide, next, prev}) {
         td {sub}
     `
   })
+  const s1 = {
+    color: '#f00',
+    fontWeight: 'bold'
+  }
+  const s2 = {
+    color: '#00f'
+  }
   return pug`
     div
       div
-        span 今の字幕:&nbsp;
-        span {slide.data[n]}
-      div
         button(onClick='{prev}') 前へ
         button(onClick='{next}') 次へ
-      div
-        span 次の字幕:&nbsp;
+      table
+        tbody {previosly}
+      div(style='{s1}')
+        span {slide.data[n]}
+      div(style='{s2}')
         span {slide.data[n + 1]}
       table
         tbody {recently}
