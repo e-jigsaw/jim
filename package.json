@@ -9,7 +9,7 @@
   "scripts": {
     "before": "mkdir -p build/controller && mkdir -p build/viewer",
     "build": "npm-run-all -s before -p build:*",
-    "build:copy": "cp src/index.html build/controller && cp src/index.html build/viewer && cp assets/target.srt build",
+    "build:copy": "cp src/index.html build/controller && cp src/index.html build/viewer",
     "build:js": "node scripts/build.js",
     "start": "node index.js"
   },
