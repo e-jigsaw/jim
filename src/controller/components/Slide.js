@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import Switch from './Switch.js'
 import {nextHandler, prevHandler} from '../actions/creators/slideHandler.js'
 
+function getSub (ary) {
+  return ary.length === 0 ? ['■'] : ary
+}
+
 function Slide ({info, slide, next, prev}) {
   if (slide.data === undefined) {
     return pug`span`
@@ -12,7 +16,7 @@ function Slide ({info, slide, next, prev}) {
   const p1 = n - 1 < 0 ? 0 : n - 1
   const p2 = n - 11 < 0 ? 0 : n - 11
   const previosly = Object.keys(slide.data).slice(p2, p1).map(key => {
-    const sub = slide.data[key]
+    const sub = getSub(slide.data[key])
     const k = `prev-${key}`
     return pug`
       tr(key='{k}')
@@ -20,7 +24,7 @@ function Slide ({info, slide, next, prev}) {
     `
   })
   const recently = Object.keys(slide.data).slice((n + 1), (n + 11)).map(key => {
-    const sub = slide.data[key]
+    const sub = getSub(slide.data[key])
     const k = `recent-${key}`
     return pug`
       tr(key='{k}')
@@ -28,7 +32,7 @@ function Slide ({info, slide, next, prev}) {
     `
   })
   const previosly1 = Object.keys(slide.data1).slice(p2, p1).map(key => {
-    const sub = slide.data[key]
+    const sub = getSub(slide.data1[key])
     const k = `prev1-${key}`
     return pug`
       tr(key='{k}')
@@ -36,7 +40,7 @@ function Slide ({info, slide, next, prev}) {
     `
   })
   const recently1 = Object.keys(slide.data1).slice((n + 1), (n + 11)).map(key => {
-    const sub = slide.data[key]
+    const sub = getSub(slide.data1[key])
     const k = `recent1-${key}`
     return pug`
       tr(key='{k}')
@@ -63,9 +67,9 @@ function Slide ({info, slide, next, prev}) {
         table
           tbody {previosly}
         div(style='{s1}')
-          span {slide.data[n]}
+          span {getSub(slide.data[n])}
         div(style='{s2}')
-          span {slide.data[n + 1]}
+          span {getSub(slide.data[n + 1])}
         table
           tbody {recently}
         div

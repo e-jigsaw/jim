@@ -3,7 +3,7 @@ import {frr} from 'redux-frr'
 function split (srts) {
   const subs = {1: []}
   let key = 1
-  srts.split('\n').forEach(str => {
+  srts.replace(/\n\n\n/g, '\n\n').split('\n').forEach(str => {
     if (str.length === 0) {
       key += 1
       subs[key] = []
